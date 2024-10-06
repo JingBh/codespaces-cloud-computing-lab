@@ -1,0 +1,53 @@
+{
+	"name": "cloud-computing-lab",
+	"forwardPorts": [
+		"db:3306",
+		"tomcat:8080",
+		"wildfly:8080",
+		"wildfly:9990"
+	],
+	"portsAttributes": {
+		"db:3306": {
+			"label": "MySQL",
+			"onAutoForward": "ignore",
+			"requireLocalPort": false
+		},
+		"tomcat:8080": {
+			"label": "Tomcat",
+			"onAutoForward": "notify"
+		},
+		"wildfly:8080": {
+			"label": "WildFly",
+			"onAutoForward": "notify"
+		},
+		"wildfly:9990": {
+			"label": "WildFly Management",
+			"onAutoForward": "notify",
+			"requireLocalPort": false
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/sshd:1": {},
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "12"
+		}
+	},
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "dev",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"MS-CEINTL.vscode-language-pack-zh-hans",
+				"redhat.vscode-server-connector",
+				"redhat.vscode-xml",
+				"redhat.vscode-yaml",
+				"vscjava.vscode-java-pack",
+				"WakaTime.vscode-wakatime"
+			],
+			"settings": {}
+		}
+	}
+}

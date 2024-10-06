@@ -1,0 +1,37 @@
+services:
+  dev:
+    image: mcr.microsoft.com/devcontainers/java:8
+    environment:
+      MYSQL_CONNECTION: "jdbc:mysql://db:3306/app?user=root&password=furpfjRnZP"
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+  
+  db:
+    image: mysql:5
+    platform: linux/x86_64
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: furpfjRnZP
+      MYSQL_DB: app
+    healthcheck:
+      test: "mysqladmin ping -h localhost -u root -pfurpfjRnZP"
+  
+  tomcat:
+    image: tomcat:9-jre8
+    volumes:
+      - ../build/deployments/tomcat:/usr/local/tomcat/webapps:cached
+    depends_on:
+      - db
+  
+  wildfly:
+    image: jboss/wildfly:10.1.0.Final
+    platform: linux/x86_64
+    volumes:
+      - ../build/deployments/wildfly:/opt/jboss/wildfly/standalone/deployments:cached
+    depends_on:
+      - db
+
+volumes:
+  mysql-data:
