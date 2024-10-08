@@ -21,7 +21,7 @@ services:
   tomcat:
     image: tomcat:9-jre8
     volumes:
-      - ../build/deployments/tomcat:/usr/local/tomcat/webapps:cached
+      - ../target/deployments:/usr/local/tomcat/webapps:cached
     depends_on:
       - db
   
@@ -29,7 +29,7 @@ services:
     image: jboss/wildfly:10.1.0.Final
     platform: linux/x86_64
     volumes:
-      - ../build/deployments/wildfly:/opt/jboss/wildfly/standalone/deployments:cached
+      - ../target/deployments:/opt/jboss/wildfly/standalone/deployments:cached
     depends_on:
       - db
 
