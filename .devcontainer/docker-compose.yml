@@ -1,6 +1,6 @@
 services:
   dev:
-    image: mcr.microsoft.com/devcontainers/java:8
+    image: mcr.microsoft.com/devcontainers/base:bookworm
     environment:
       MYSQL_CONNECTION: "jdbc:mysql://db:3306/app?user=root&password=furpfjRnZP"
     volumes:
